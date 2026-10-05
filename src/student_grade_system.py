@@ -15,8 +15,8 @@ DEFAULT_DATA = {
         {"username": "s001", "password": "123456", "role": "student", "student_id": "S001"},
     ],
     "students": [
-        {"id": "S001", "name": "张三", "class_name": "一班"},
-        {"id": "S002", "name": "李四", "class_name": "一班"},
+        {"id": "S001", "name": "张三", "gender": "男", "class_name": "一班"},
+        {"id": "S002", "name": "李四", "gender": "男", "class_name": "一班"},
     ],
     "courses": [
         {"id": "C001", "name": "数学"},
@@ -102,7 +102,7 @@ def list_students(data):
         print("暂无学生")
         return
     for s in data["students"]:
-        print(f"{s['id']:>8} | {s['name']:<8} | {s.get('class_name', '')}")
+        print(f"{s['id']:>8} | {s['name']:<8} | {s.get('gender', ''):<4} | {s.get('class_name', '')}")
 
 
 def list_courses(data):
@@ -141,8 +141,9 @@ def add_student(data):
         print("姓名不能为空")
         return
 
+    gender = input("性别（男/女，可空）：").strip() or "未知"
     class_name = input("班级（可空）：").strip() or "未分班"
-    data["students"].append({"id": sid, "name": name, "class_name": class_name})
+    data["students"].append({"id": sid, "name": name, "gender": gender, "class_name": class_name})
     save_data(data)
     print("添加学生成功")
 
